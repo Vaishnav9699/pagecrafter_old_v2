@@ -19,17 +19,6 @@ export default function PreviewPanel({ code, pages, isVisible, isLoading = false
   const { theme } = useTheme();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [activePage, setActivePage] = useState('home');
-  const [showPreview, setShowPreview] = useState(!isLoading);
-
-  // Sync showPreview with isLoading with a delay
-  useEffect(() => {
-    if (isLoading) {
-      setShowPreview(false);
-    } else {
-      const timer = setTimeout(() => setShowPreview(true), 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [isLoading]);
 
   // Function to update iframe content
   const updateIframeContent = () => {
@@ -156,8 +145,8 @@ export default function PreviewPanel({ code, pages, isVisible, isLoading = false
 
       {/* Content */}
       <div className="flex-1 relative overflow-hidden bg-black">
-        {isLoading || !showPreview ? (
-          <div className={`absolute inset-0 z-40 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-700 ${!isLoading && showPreview ? 'opacity-0' : 'opacity-100'}`}>
+        {isLoading ? (
+          <div className="absolute inset-0 z-40 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-700 opacity-100">
             <div className="flex flex-col items-center justify-center gap-6 p-8 rounded-3xl backdrop-blur-md bg-black/40 border border-white/5 animate-slide-up">
               <HexagonalLoader size={100} color="#6366f1" />
               <div className="flex flex-col items-center gap-3 text-center">

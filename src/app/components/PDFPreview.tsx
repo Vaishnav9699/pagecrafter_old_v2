@@ -56,10 +56,10 @@ export default function PDFPreview({ document: doc, isLoading }: PDFPreviewProps
 
     if (isLoading && !doc) {
         return (
-            <div className="flex-1 flex flex-col items-center justify-center bg-gray-900/50 backdrop-blur-md gap-8">
+            <div className="flex-1 flex flex-col items-center justify-center bg-white gap-8">
                 <HexagonalLoader size={120} color="#ef4444" />
                 <div className="flex flex-col items-center gap-2">
-                    <span className="text-2xl font-black text-white tracking-tight">Drafting Document</span>
+                    <span className="text-2xl font-black text-gray-900 tracking-tight">Drafting Document</span>
                     <span className="text-red-500 font-bold animate-pulse text-sm uppercase tracking-widest">AI is writing your content...</span>
                 </div>
             </div>
@@ -68,24 +68,24 @@ export default function PDFPreview({ document: doc, isLoading }: PDFPreviewProps
 
     if (!doc) {
         return (
-            <div className="flex-1 flex flex-col items-center justify-center text-center p-12 bg-gray-900/20">
-                <div className="w-32 h-32 rounded-[3rem] bg-red-600/10 flex items-center justify-center text-red-400 mb-8 border border-red-500/20 shadow-2xl">
+            <div className="flex-1 flex flex-col items-center justify-center text-center p-12 bg-white">
+                <div className="w-32 h-32 rounded-[3rem] bg-red-50 flex items-center justify-center text-red-500 mb-8 border border-red-100 shadow-xl">
                     <FileText className="w-16 h-16" />
                 </div>
-                <h2 className="text-3xl font-black text-white mb-4">Your Document Awaits</h2>
+                <h2 className="text-3xl font-black text-gray-900 mb-4">Your Document Awaits</h2>
                 <p className="text-gray-500 max-w-sm font-medium">Describe your requirements in the chat to generate a professional PDF document instantly.</p>
             </div>
         );
     }
 
     return (
-        <div className="flex-1 flex flex-col h-full bg-[#0a0c10] overflow-hidden">
+        <div className="flex-1 flex flex-col h-full bg-white overflow-hidden">
             {/* Header */}
-            <div className="flex items-center justify-between px-8 py-4 bg-white/5 border-b border-white/5">
+            <div className="flex items-center justify-between px-8 py-4 bg-white border-b border-gray-200">
                 <div className="flex items-center gap-4">
-                    <span className="text-xs font-black text-white/40 uppercase tracking-[0.2em]">PDF Preview</span>
-                    <div className="h-4 w-px bg-white/10" />
-                    <h3 className="text-sm font-bold text-gray-300 truncate max-w-[200px]">{doc.title}</h3>
+                    <span className="text-xs font-black text-gray-400 uppercase tracking-[0.2em]">PDF Preview</span>
+                    <div className="h-4 w-px bg-gray-200" />
+                    <h3 className="text-sm font-bold text-gray-800 truncate max-w-[200px]">{doc.title}</h3>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="relative" ref={shareMenuRef}>
@@ -99,18 +99,18 @@ export default function PDFPreview({ document: doc, isLoading }: PDFPreviewProps
                         </button>
 
                         {isShareMenuOpen && (
-                            <div className="absolute right-0 mt-2 w-56 bg-[#1a1c23] border border-white/5 rounded-2xl shadow-2xl overflow-hidden z-[110] animate-fade-in">
+                            <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden z-[110] animate-fade-in">
                                 <div className="p-2 space-y-1">
                                     <button
                                         onClick={handleExportPDF}
-                                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-gray-400 hover:text-white hover:bg-white/5 transition-colors group text-left"
+                                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors group text-left"
                                     >
-                                        <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center text-red-400 group-hover:scale-110 transition-transform">
+                                        <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-500 group-hover:scale-110 transition-transform">
                                             <Download size={16} />
                                         </div>
                                         <div className="flex flex-col">
                                             <span>Export as PDF</span>
-                                            <span className="text-[10px] text-gray-600 font-medium">Download professional PDF</span>
+                                            <span className="text-[10px] text-gray-500 font-medium">Download professional PDF</span>
                                         </div>
                                     </button>
 
@@ -122,14 +122,14 @@ export default function PDFPreview({ document: doc, isLoading }: PDFPreviewProps
                                             alert('Document is now public! Link copied to clipboard.');
                                             setIsShareMenuOpen(false);
                                         }}
-                                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-gray-400 hover:text-white hover:bg-white/5 transition-colors group text-left"
+                                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors group text-left"
                                     >
-                                        <div className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 group-hover:scale-110 transition-transform">
+                                        <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-500 group-hover:scale-110 transition-transform">
                                             <Globe size={16} />
                                         </div>
                                         <div className="flex flex-col">
                                             <span>Share Publicly</span>
-                                            <span className="text-[10px] text-gray-600 font-medium">Make public & copy link</span>
+                                            <span className="text-[10px] text-gray-500 font-medium">Make public & copy link</span>
                                         </div>
                                     </button>
                                 </div>
@@ -140,10 +140,10 @@ export default function PDFPreview({ document: doc, isLoading }: PDFPreviewProps
             </div>
 
             {/* Preview Canvas */}
-            <div className="flex-1 p-8 overflow-y-auto custom-scrollbar flex justify-center">
+            <div className="flex-1 p-8 overflow-y-auto custom-scrollbar flex justify-center bg-gray-50">
                 <div
                     ref={previewRef}
-                    className="w-full max-w-[800px] bg-white text-gray-900 p-12 shadow-2xl min-h-[1056px] flex flex-col gap-8 rounded-sm"
+                    className="w-full max-w-[800px] h-max bg-white text-gray-900 p-12 shadow-sm min-h-[1056px] flex flex-col gap-8 rounded-sm"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                     <div className="border-b-4 border-red-600 pb-6">
