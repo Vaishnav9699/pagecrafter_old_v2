@@ -14,7 +14,6 @@
     "@grapesjs/react": "^2.0.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.90.1",
-<<<<<<< HEAD
     "@tiptap/extension-color": "^3.20.4",
     "@tiptap/extension-font-family": "^3.20.4",
     "@tiptap/extension-highlight": "^3.20.4",
@@ -37,11 +36,6 @@
     "express": "^4.18.2",
     "fabric": "^7.2.0",
     "file-saver": "^2.0.5",
-=======
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
     "grapesjs": "^0.22.14",
     "html2pdf.js": "^0.14.0",
     "jszip": "^3.10.1",
@@ -49,10 +43,7 @@
     "mime": "^4.0.7",
     "next": "^16.1.4",
     "pg": "^8.11.3",
-<<<<<<< HEAD
     "pptxgenjs": "^4.0.1",
-=======
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-syntax-highlighter": "^15.6.1"

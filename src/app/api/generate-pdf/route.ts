@@ -4,7 +4,6 @@ import { GoogleGenAI } from "@google/genai";
 export async function POST(request: NextRequest) {
     try {
         const message = await request.json();
-<<<<<<< HEAD
         const apiKey = message.customApiKey || process.env.GEMINI_API_KEY;
 
         if (!apiKey) {
@@ -12,23 +11,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json(
                 { error: "API Key is not configured. Please add it in Settings." },
                 { status: 400 },
-=======
-
-        if (!process.env.GEMINI_API_KEY) {
-            console.error("PDF Generator: GEMINI_API_KEY is missing");
-            return NextResponse.json(
-                { error: "GEMINI_API_KEY is not configured" },
-                { status: 500 },
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
             );
         }
 
         const ai = new GoogleGenAI({
-<<<<<<< HEAD
             apiKey: apiKey,
-=======
-            apiKey: process.env.GEMINI_API_KEY,
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
         });
 
         const config = {
@@ -68,10 +55,7 @@ JSON_END
 Guidelines:
 - Keep the headings clear and professional.
 - Use detailed and informative content for each section.
-<<<<<<< HEAD
 - CRITICAL: The 'content' field must ALWAYS be a flat string. DO NOT use arrays, objects, or nested JSON within the content field. Format lists using plain text newlines (\n) or bullet points.
-=======
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
 - Ensure the JSON is valid.`;
 
         const contents = [

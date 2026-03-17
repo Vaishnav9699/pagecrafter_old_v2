@@ -4,7 +4,6 @@ import { GoogleGenAI } from "@google/genai";
 export async function POST(request: NextRequest) {
     try {
         const message = await request.json();
-<<<<<<< HEAD
         const apiKey = message.customApiKey || process.env.GEMINI_API_KEY;
 
         if (!apiKey) {
@@ -12,23 +11,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json(
                 { error: "API Key is not configured. Please add it in Settings." },
                 { status: 400 },
-=======
-
-        if (!process.env.GEMINI_API_KEY) {
-            console.error("PPT Generator: GEMINI_API_KEY is missing");
-            return NextResponse.json(
-                { error: "GEMINI_API_KEY is not configured" },
-                { status: 500 },
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
             );
         }
 
         const ai = new GoogleGenAI({
-<<<<<<< HEAD
             apiKey: apiKey,
-=======
-            apiKey: process.env.GEMINI_API_KEY,
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
         });
 
         // Mirroring the working generate/route.ts config
@@ -69,12 +56,8 @@ JSON_END
 Guidelines:
 - First slide MUST be layout "title".
 - Subsequent slides should be layout "content".
-<<<<<<< HEAD
 - Keep content items concise.
 - CRITICAL: Each item in the 'content' array must ALWAYS be a flat string. DO NOT use nested arrays or objects within the content items.`;
-=======
-- Keep content items concise.`;
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
 
         const contents = [
             {

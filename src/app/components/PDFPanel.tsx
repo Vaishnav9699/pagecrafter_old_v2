@@ -43,7 +43,6 @@ export default function PDFPanel({ onPDFGenerated, onLoadingChange, onBack }: PD
         setMessages(newMessages);
 
         try {
-<<<<<<< HEAD
             const customApiKey = localStorage.getItem('gemini_api_key');
             const response = await fetch('/api/generate-pdf', {
                 method: 'POST',
@@ -52,12 +51,6 @@ export default function PDFPanel({ onPDFGenerated, onLoadingChange, onBack }: PD
                     prompt: userMessage,
                     customApiKey: customApiKey
                 }),
-=======
-            const response = await fetch('/api/generate-pdf', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prompt: userMessage }),
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
             });
 
             if (!response.ok) throw new Error('Failed to generate PDF');

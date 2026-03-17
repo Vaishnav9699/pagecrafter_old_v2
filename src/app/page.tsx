@@ -15,11 +15,8 @@ import PPTPanel from './components/PPTPanel';
 import PPTPreview from './components/PPTPreview';
 import PDFPanel from './components/PDFPanel';
 import PDFPreview from './components/PDFPreview';
-<<<<<<< HEAD
 import DOCPanel from './components/DOCPanel';
 import DOCPreview from './components/DOCPreview';
-=======
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
 import DashboardBackground from './components/DashboardBackground';
 import HolographicCard from './components/HolographicCard';
 import PublishModal from './components/PublishModal';
@@ -127,11 +124,8 @@ export default function Home() {
   const [isPPTLoading, setIsPPTLoading] = useState(false);
   const [pdfDocument, setPdfDocument] = useState<any>(null);
   const [isPDFLoading, setIsPDFLoading] = useState(false);
-<<<<<<< HEAD
   const [docDocument, setDocDocument] = useState<any>(null);
   const [isDocLoading, setIsDocLoading] = useState(false);
-=======
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
   const [settingsTab, setSettingsTab] = useState<string>('Account');
   const [mobileView, setMobileView] = useState<'chat' | 'preview'>('chat'); // Mobile toggle between chat and preview
   const [generatedPages, setGeneratedPages] = useState<Record<string, { title: string; html: string; css: string; js: string; }> | undefined>(undefined);
@@ -850,11 +844,7 @@ ${project.lastGeneratedCode ? 'This project contains generated HTML, CSS, and Ja
           onProjectSelect={handleProjectSelect}
           onNewProject={handleNewProject}
           onDeleteProject={handleDeleteProject}
-<<<<<<< HEAD
           activeView={activeView === 'ai-models' ? 'dashboard' : activeView}
-=======
-          activeView={activeView}
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
           onViewChange={setActiveView}
           isCollapsed={sidebarCollapsed}
           onMouseEnter={() => setSidebarCollapsed(false)}
@@ -914,7 +904,6 @@ ${project.lastGeneratedCode ? 'This project contains generated HTML, CSS, and Ja
                 <PDFPreview document={pdfDocument} isLoading={isPDFLoading} />
               </div>
             </div>
-<<<<<<< HEAD
           ) : activeView === 'doc' ? (
             /* DOC View */
             <div className="flex flex-col md:flex-row flex-1 relative w-full h-full overflow-hidden">
@@ -929,8 +918,6 @@ ${project.lastGeneratedCode ? 'This project contains generated HTML, CSS, and Ja
                 <DOCPreview document={docDocument} isLoading={isDocLoading} />
               </div>
             </div>
-=======
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
           ) : (
             /* Main Content Views */
             <div className={`flex-1 flex flex-col relative overflow-y-auto ${theme === 'dark' ? 'bg-[#0a0a0c]' : 'bg-gray-50'} custom-scrollbar scroll-smooth`}>
@@ -1048,11 +1035,7 @@ ${project.lastGeneratedCode ? 'This project contains generated HTML, CSS, and Ja
                         </div>
 
                         {/* Other Modes - Grid Below */}
-<<<<<<< HEAD
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-=======
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
                           <HolographicCard
                             title="Website Creation"
                             description="Rapid AI Generation"
@@ -1074,7 +1057,6 @@ ${project.lastGeneratedCode ? 'This project contains generated HTML, CSS, and Ja
                             type="pdf"
                             onClick={() => setActiveView('pdf')}
                           />
-<<<<<<< HEAD
                           <HolographicCard
                             title="Doc Maker"
                             description="Word Documents"
@@ -1082,8 +1064,6 @@ ${project.lastGeneratedCode ? 'This project contains generated HTML, CSS, and Ja
                             type="doc"
                             onClick={() => setActiveView('doc')}
                           />
-=======
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
                         </div>
                       </div>
 

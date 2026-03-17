@@ -7,11 +7,7 @@ interface HolographicCardProps {
     description: string;
     color: string;
     onClick: () => void;
-<<<<<<< HEAD
     type: 'ppt' | 'pdf' | 'website' | 'advanced' | 'doc';
-=======
-    type: 'ppt' | 'pdf' | 'website' | 'advanced';
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
 }
 
 const HolographicCard: React.FC<HolographicCardProps> = ({ title, description, color, onClick, type }) => {
@@ -22,10 +18,7 @@ const HolographicCard: React.FC<HolographicCardProps> = ({ title, description, c
             case 'ppt': return { stats: ['20+ Layouts', 'Dynamic Charts', 'AI Writer'], hint: 'Start Deck' };
             case 'pdf': return { stats: ['OCR Engine', 'Signed Docs', 'Cloud Sync'], hint: 'Generate PDF' };
             case 'advanced': return { stats: ['Full JSX', 'Live Preview', 'API Access'], hint: 'Open Editor' };
-<<<<<<< HEAD
             case 'doc': return { stats: ['Rich Editor', 'DOCX Export', 'Auto-Save'], hint: 'Create Document' };
-=======
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
             default: return { stats: [], hint: 'Select Mode' };
         }
     };
@@ -46,11 +39,7 @@ const HolographicCard: React.FC<HolographicCardProps> = ({ title, description, c
                         style={{
                             borderColor: `${color}30`,
                             // @ts-ignore
-<<<<<<< HEAD
                             '--glow-color': color === '#fb923c' ? '251, 146, 60' : color === '#ef4444' ? '239, 68, 68' : color === '#818cf8' ? '129, 140, 248' : color === '#10b981' ? '16, 185, 129' : '168, 85, 247'
-=======
-                            '--glow-color': color === '#fb923c' ? '251, 146, 60' : color === '#ef4444' ? '239, 68, 68' : color === '#818cf8' ? '129, 140, 248' : '168, 85, 247'
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
                         } as any}
                     />
 
@@ -107,7 +96,6 @@ const HolographicCard: React.FC<HolographicCardProps> = ({ title, description, c
                                 </div>
                             )}
 
-<<<<<<< HEAD
                             {type === 'doc' && (
                                 <div className="relative w-full h-full flex flex-col items-center justify-center">
                                     <div className="absolute w-24 h-24 bg-emerald-500/10 blur-3xl rounded-full animate-pulse" />
@@ -128,8 +116,6 @@ const HolographicCard: React.FC<HolographicCardProps> = ({ title, description, c
                                 </div>
                             )}
 
-=======
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
                             {type === 'advanced' && (
                                 <div className="relative w-full h-full flex items-center justify-center">
                                     <div className="absolute inset-0 opacity-20 font-mono text-[6px] overflow-hidden select-none pointer-events-none text-purple-400 flex flex-wrap gap-1 leading-none p-2">

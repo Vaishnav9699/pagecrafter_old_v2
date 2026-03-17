@@ -8,15 +8,11 @@ import {
   LayoutGrid,
   Image as ImageIcon,
   Settings,
-<<<<<<< HEAD
   ChevronDown,
   Presentation,
   FileText as FileWord,
   FileStack as FilePdf,
   Sparkles
-=======
-  ChevronDown
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { Project } from '../../lib/supabaseOperations';
@@ -56,17 +52,13 @@ export default function Sidebar({
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'projects', label: 'Projects', icon: Folder, hasDropdown: true },
-<<<<<<< HEAD
     { id: 'ai-models', label: 'AI Models', icon: Sparkles, hasDropdown: true },
-=======
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
     { id: 'community', label: 'Community', icon: Globe },
     { id: 'templates', label: 'Templates', icon: LayoutGrid },
     { id: 'assets', label: 'Assets', icon: ImageIcon },
     { id: 'settings', label: 'Settings', icon: Settings, hasDropdown: true },
   ];
 
-<<<<<<< HEAD
   const aiModelItems = [
     { id: 'ppt', label: 'PPT Maker', icon: Presentation, color: 'text-orange-500' },
     { id: 'pdf', label: 'PDF Maker', icon: FilePdf, color: 'text-red-500' },
@@ -75,8 +67,6 @@ export default function Sidebar({
 
   const [isAIModelsExpanded, setIsAIModelsExpanded] = useState(true);
 
-=======
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
   return (
     <>
       {/* Overlay for mobile */}
@@ -110,13 +100,9 @@ export default function Sidebar({
                   onClick={() => {
                     if (item.id === 'projects') {
                       setIsProjectsExpanded(!isProjectsExpanded);
-<<<<<<< HEAD
                       onViewChange('dashboard'); // Go to dashboard if projects are closed
                     } else if (item.id === 'ai-models') {
                       setIsAIModelsExpanded(!isAIModelsExpanded);
-=======
-                      onViewChange('projects');
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
                     } else {
                       onViewChange(item.id);
                     }
@@ -142,12 +128,8 @@ export default function Sidebar({
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ${(item.id === 'projects' && isProjectsExpanded) ||
-<<<<<<< HEAD
                         (item.id === 'settings' && isSettingsExpanded) ||
                         (item.id === 'ai-models' && isAIModelsExpanded)
-=======
-                        (item.id === 'settings' && isSettingsExpanded)
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
                         ? 'rotate-180'
                         : ''
                         }`}
@@ -199,7 +181,6 @@ export default function Sidebar({
                   </div>
                 )}
 
-<<<<<<< HEAD
                 {/* AI Models Dropdown Content */}
                 {item.id === 'ai-models' && isAIModelsExpanded && !isCollapsed && (
                   <div className={`ml-4 pl-4 space-y-1 py-1 animate-fade-in ${theme === 'dark' ? 'border-l border-slate-800/50' : 'border-l border-gray-200'
@@ -224,8 +205,6 @@ export default function Sidebar({
                   </div>
                 )}
 
-=======
->>>>>>> 98beb4c8ee5d24125c6587fdfb320453c1a59529
               </div>
             );
           })}
