@@ -466,20 +466,68 @@ export default function DOCPreview({ document: initialDoc, isLoading }: DOCPrevi
             <div className="flex-1 p-8 overflow-y-auto custom-scrollbar flex justify-center bg-gray-50">
                 {doc.grapesHtml ? (
                     <div 
-                        className="w-full max-w-[800px] bg-white text-gray-900 shadow-xl min-h-[1056px] relative overflow-hidden ring-1 ring-gray-200"
+                        className="w-full max-w-[800px] bg-white text-gray-900 shadow-xl min-h-[1056px] relative overflow-x-hidden ring-1 ring-gray-200"
                         style={{ fontFamily: "'Inter', sans-serif", color: '#111827' }}
                     >
                         <style dangerouslySetInnerHTML={{ __html: `
+                            /* Base wrapper padding */
                             #wrapper { padding: 48px; box-sizing: border-box; }
+
+                            /* ===== Class-based styles (original AI template HTML) ===== */
                             .emerald-title-block { border-bottom: 4px solid #059669; padding-bottom: 24px; margin-bottom: 32px; }
                             .emerald-title { font-size: 2.25rem; font-weight: 900; color: #111827 !important; margin: 0 0 8px 0 !important; text-transform: uppercase !important; letter-spacing: -0.05em !important; line-height: 1 !important; }
                             .emerald-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.1em; }
                             .emerald-heading-block { border-left: 4px solid #059669; padding: 4px 0 4px 16px; margin-bottom: 16px; }
                             .emerald-heading { font-size: 1.25rem; font-weight: 900; color: #059669 !important; text-transform: uppercase !important; letter-spacing: -0.025em !important; line-height: 1.2 !important; margin: 0 !important; }
+
+                            /* ===== Tag-based styles (TipTap editor output after save) ===== */
+                            /* These target the semantic HTML that TipTap generates */
+                            .doc-preview-content { padding: 48px; box-sizing: border-box; }
+                            .doc-preview-content h1 {
+                                font-size: 2.25rem; font-weight: 900; color: #111827;
+                                margin: 0 0 2rem 0; border-bottom: 4px solid #059669;
+                                padding-bottom: 1.5rem; text-transform: uppercase;
+                                letter-spacing: -0.05em; line-height: 1;
+                            }
+                            .doc-preview-content h2 {
+                                font-size: 1.25rem; font-weight: 900; color: #059669;
+                                border-left: 4px solid #059669; padding: 0.25rem 0 0.25rem 1rem;
+                                margin: 2rem 0 1rem 0; text-transform: uppercase;
+                                letter-spacing: -0.025em; line-height: 1.2;
+                            }
+                            .doc-preview-content h3 {
+                                font-size: 1.1rem; font-weight: 800; color: #065f46;
+                                margin: 1.5rem 0 0.75rem 0;
+                            }
+                            .doc-preview-content p {
+                                line-height: 1.625; margin: 0 0 1rem 0; color: #374151;
+                                font-weight: 500; font-size: 1.125rem;
+                            }
+                            .doc-preview-content ul, .doc-preview-content ol {
+                                margin: 0 0 1rem 0; padding-left: 1.5rem; color: #374151;
+                                font-weight: 500; font-size: 1.125rem; line-height: 1.625;
+                            }
+                            .doc-preview-content li { margin-bottom: 0.25rem; }
+                            .doc-preview-content table {
+                                border-collapse: collapse; width: 100%; margin: 1rem 0;
+                            }
+                            .doc-preview-content td, .doc-preview-content th {
+                                border: 1px solid #e5e7eb; padding: 8px 12px;
+                                text-align: left; font-size: 0.95rem;
+                            }
+                            .doc-preview-content th {
+                                background-color: #f0fdf4; font-weight: 700; color: #065f46;
+                            }
+                            .doc-preview-content strong { font-weight: 800; }
+                            .doc-preview-content em { font-style: italic; }
+                            .doc-preview-content u { text-decoration: underline; }
+                            .doc-preview-content img { max-width: 100%; height: auto; margin: 1rem 0; border-radius: 4px; }
+
+                            /* General p fallback for template HTML */
                             p { line-height: 1.625; margin: 0; color: #374151; font-weight: 500; font-size: 1.125rem; }
                             ${doc.grapesCss || ''}
                         ` }} />
-                        <div dangerouslySetInnerHTML={{ __html: doc.grapesHtml }} />
+                        <div className="doc-preview-content" dangerouslySetInnerHTML={{ __html: doc.grapesHtml }} />
                     </div>
                 ) : (
                     <div className="w-full max-w-[800px] h-max bg-white text-gray-900 p-12 shadow-sm min-h-[1056px] flex flex-col gap-8 rounded-sm ring-1 ring-gray-100">
