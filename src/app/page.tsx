@@ -641,9 +641,6 @@ ${project.lastGeneratedCode ? 'This project contains generated HTML, CSS, and Ja
                 <span className="text-sm font-bold text-gray-400 group-hover:text-white transition-colors">
                   {currentProject?.name || 'Untitled Project'}
                 </span>
-                <svg className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                </svg>
               </div>
             </div>
           )}
