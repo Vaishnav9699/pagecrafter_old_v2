@@ -394,7 +394,7 @@ export default function PDFPreview({ document: doc, isLoading }: PDFPreviewProps
             )}
 
             {/* Preview Canvas */}
-            <div className={`flex-1 p-8 overflow-y-auto custom-scrollbar flex flex-col items-center ${theme === 'dark' ? 'bg-[#0a0a0c]' : 'bg-gray-50'}`}>
+            <div className="flex-1 p-8 overflow-y-auto custom-scrollbar flex flex-col items-center" style={{ backgroundColor: '#ffffff' }}>
                 <div className="mb-4 text-[10px] font-black uppercase tracking-[0.3em] text-red-500 animate-pulse">Edit any text to modify document</div>
                 
                 <div
@@ -405,7 +405,8 @@ export default function PDFPreview({ document: doc, isLoading }: PDFPreviewProps
                         fontFamily: "'Inter', 'Segoe UI', Roboto, sans-serif",
                         backgroundColor: '#ffffff',
                         color: '#111827',
-                        boxShadow: 'none'
+                        boxShadow: 'none',
+                        colorScheme: 'light'
                     }}
                 >
                     <div style={{ borderBottom: '4px solid #dc2626', paddingBottom: '2rem' }}>
