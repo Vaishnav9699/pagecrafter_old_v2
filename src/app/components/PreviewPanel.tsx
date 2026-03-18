@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import HexagonalLoader from './HexagonalLoader';
+import { createClient as createSbClient } from '@/lib/supabase/client';
 
 // Dynamic import to ensure GrapesJS (DOM-heavy) never loads server-side
 const GrapesEditor = lazy(() => import('./GrapesEditor'));
@@ -141,11 +142,31 @@ export default function PreviewPanel({ code, pages, isVisible, isLoading = false
     setIsGrapesOpen(false);
   };
 
+  // Pro gating: open editor only for Pro plan users
+  const handleOpenEditor = async () => {
+    try {
+      const sb = createSbClient();
+      const { data } = await sb
+        .from('user_settings')
+        .select('plan_tier')
+        .single();
+
+      if (data?.plan_tier === 'pro') {
+        setIsGrapesOpen(true);
+      } else {
+        // Redirect to pricing for upgrade
+        window.location.href = '/pricing';
+      }
+    } catch {
+      window.location.href = '/pricing';
+    }
+  };
+
   return (
     <>
       {/* GrapesJS full-screen editor */}
       {isGrapesOpen && (
-        <Suspense fallback={<div style={{ position:'fixed', inset:0, zIndex:9999, background:'#0f1117', display:'flex', alignItems:'center', justifyContent:'center', color:'white' }}>Loading Editor...</div>}>
+        <Suspense fallback={<div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: '#0f1117', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>Loading Editor...</div>}>
           <GrapesEditor
             html={getActiveHtml()}
             css={getActiveCss()}
@@ -176,13 +197,12 @@ export default function PreviewPanel({ code, pages, isVisible, isLoading = false
             {/* Edit in GrapesJS button - only shows when there's generated code */}
             {code.html && (
               <button
-                onClick={() => setIsGrapesOpen(true)}
-                title="Edit visually with Editor"
-                className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all border ${
-                  theme === 'dark'
+                onClick={handleOpenEditor}
+                title="Edit visually (Pro required)"
+                className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all border ${theme === 'dark'
                     ? 'bg-indigo-500/10 border-indigo-500/30 text-indigo-400 hover:bg-indigo-500/20 hover:text-indigo-300'
                     : 'bg-indigo-50 border-indigo-200 text-indigo-600 hover:bg-indigo-100'
-                }`}
+                  }`}
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />

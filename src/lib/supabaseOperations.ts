@@ -758,3 +758,38 @@ export async function sendChatMessage(message: string, userName: string): Promis
     createdAt: new Date(data.created_at),
   };
 }
+
+/**
+* Billing: Retrieve the current user's plan tier.
+* Returns 'pro' | 'free' | 'trial' (defaulting to 'free' if no row found).
+*/
+export type PlanTier = 'free' | 'pro' | 'trial';
+
+export async function getUserPlan(): Promise<PlanTier> {
+  const userId = await getCurrentUserId();
+  if (!userId) return 'free';
+
+  const { data, error } = await supabase
+    .from('user_settings')
+    .select('plan_tier')
+    .eq('user_id', userId)
+    .single();
+
+  if (error) {
+    // PGRST116 = no rows found for single(); treat as free
+    if ((error as any).code === 'PGRST116') return 'free';
+    console.error('Error fetching user plan:', error);
+    return 'free';
+  }
+
+  const plan = (data?.plan_tier as PlanTier | null) ?? 'free';
+  return plan;
+}
+
+/**
+* Billing: Convenience check for Pro access.
+*/
+export async function isPro(): Promise<boolean> {
+  const plan = await getUserPlan();
+  return plan === 'pro';
+}
