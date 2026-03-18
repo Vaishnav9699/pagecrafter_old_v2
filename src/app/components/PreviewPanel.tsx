@@ -24,14 +24,19 @@ export default function PreviewPanel({ code, pages, isVisible, isLoading = false
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [activePage, setActivePage] = useState('home');
   const [isGrapesOpen, setIsGrapesOpen] = useState(false);
+  const [localPages, setLocalPages] = useState(pages);
+
+  useEffect(() => {
+    setLocalPages(pages);
+  }, [pages]);
 
   // Active HTML/CSS for GrapesJS: page-specific or single-page
   const getActiveHtml = () => {
-    if (pages && pages[activePage]) return pages[activePage].html;
+    if (localPages && localPages[activePage]) return localPages[activePage].html;
     return code.html;
   };
   const getActiveCss = () => {
-    if (pages && pages[activePage]) return pages[activePage].css;
+    if (localPages && localPages[activePage]) return localPages[activePage].css;
     return code.css;
   };
 
@@ -42,8 +47,8 @@ export default function PreviewPanel({ code, pages, isVisible, isLoading = false
     const iframe = iframeRef.current;
     let fullHtml = '';
 
-    if (pages && pages[activePage]) {
-      const page = pages[activePage];
+    if (localPages && localPages[activePage]) {
+      const page = localPages[activePage];
       fullHtml = `
         <!DOCTYPE html>
         <html lang="en">
@@ -97,21 +102,35 @@ export default function PreviewPanel({ code, pages, isVisible, isLoading = false
   useEffect(() => {
     updateIframeContent();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code, activePage, pages]);
+  }, [code, activePage, localPages]);
 
   // Initialize activePage to first page when pages are loaded
   useEffect(() => {
-    if (pages && Object.keys(pages).length > 0) {
-      const firstPageKey = Object.keys(pages)[0];
+    if (localPages && Object.keys(localPages).length > 0) {
+      const firstPageKey = Object.keys(localPages)[0];
       if (activePage !== firstPageKey) {
         setActivePage(firstPageKey);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pages]);
+  }, [localPages]);
 
   // Called when user saves from GrapesJS
   const handleGrapesSave = (newHtml: string, newCss: string) => {
+    if (localPages && localPages[activePage]) {
+      setLocalPages(prev => {
+        if (!prev || !prev[activePage]) return prev;
+        return {
+          ...prev,
+          [activePage]: {
+            ...prev[activePage],
+            html: newHtml,
+            css: newCss,
+          },
+        };
+      });
+    }
+
     if (onCodeUpdate) {
       onCodeUpdate({
         html: newHtml,
@@ -154,7 +173,7 @@ export default function PreviewPanel({ code, pages, isVisible, isLoading = false
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Edit in GrapesJS button — only shows when there's generated code */}
+            {/* Edit in GrapesJS button - only shows when there's generated code */}
             {code.html && (
               <button
                 onClick={() => setIsGrapesOpen(true)}
@@ -188,9 +207,9 @@ export default function PreviewPanel({ code, pages, isVisible, isLoading = false
         </div>
 
         {/* Page Navigation */}
-        {pages && Object.keys(pages).length > 1 && (
+        {localPages && Object.keys(localPages).length > 1 && (
           <div className={`flex gap-1 px-4 py-2 border-b overflow-x-auto ${theme === 'dark' ? 'bg-gray-900 border-gray-800/50' : 'bg-gray-50 border-gray-200/50'}`}>
-            {Object.entries(pages).map(([pageKey, pageData]) => (
+            {Object.entries(localPages).map(([pageKey, pageData]) => (
               <button
                 key={pageKey}
                 onClick={() => setActivePage(pageKey)}
@@ -280,3 +299,4 @@ export default function PreviewPanel({ code, pages, isVisible, isLoading = false
     </>
   );
 }
+
