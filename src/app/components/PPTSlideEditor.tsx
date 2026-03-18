@@ -66,7 +66,7 @@ export default function PPTSlideEditor({ slides: initialSlides, onClose, onSave,
     const canvas = new fabric.Canvas(canvasRef.current, {
       width: 960,
       height: 540,
-      backgroundColor: '#ffffff',
+      backgroundColor: '#12141c',
     });
 
     fabricCanvasRef.current = canvas;
@@ -93,7 +93,7 @@ export default function PPTSlideEditor({ slides: initialSlides, onClose, onSave,
 
     canvas.clear();
     const slide = slides[index];
-    canvas.backgroundColor = slide.background || '#ffffff';
+    canvas.backgroundColor = slide.background || '#12141c';
 
     if (slide.canvasState) {
       await canvas.loadFromJSON(slide.canvasState);
@@ -103,11 +103,11 @@ export default function PPTSlideEditor({ slides: initialSlides, onClose, onSave,
       if (slide.layout === 'title') {
         const title = new fabric.IText(slide.title, {
           left: 480, top: 200, fontSize: 54, fontWeight: 'bold', fontFamily: 'Inter',
-          textAlign: 'center', originX: 'center', fill: '#1a1a1a', name: 'title'
+          textAlign: 'center', originX: 'center', fill: '#ffffff', name: 'title'
         });
         const subtitle = new fabric.IText(slide.content[0] || '', {
           left: 480, top: 320, fontSize: 24, fontFamily: 'Inter',
-          textAlign: 'center', originX: 'center', fill: '#666666', name: 'subtitle'
+          textAlign: 'center', originX: 'center', fill: '#9ca3af', name: 'subtitle'
         });
         canvas.add(title, subtitle);
       } else {
@@ -117,7 +117,7 @@ export default function PPTSlideEditor({ slides: initialSlides, onClose, onSave,
         });
         const content = new fabric.IText(slide.content.join('\n\n'), {
           left: 50, top: 150, fontSize: 20, fontFamily: 'Inter',
-          fill: '#333333', width: 860, name: 'content'
+          fill: '#d1d5db', width: 860, name: 'content'
         });
         canvas.add(title, content);
       }
@@ -137,13 +137,22 @@ export default function PPTSlideEditor({ slides: initialSlides, onClose, onSave,
     syncCanvasToState();
     const newSlide: Slide = {
       title: 'New Slide',
-      content: ['Added by user'],
+      content: ['Click to edit content'],
       layout: 'content',
-      background: '#ffffff'
+      background: '#12141c'
     };
     const newSlides = [...slides, newSlide];
     setSlides(newSlides);
     setCurrentSlideIndex(newSlides.length - 1);
+  };
+
+  const deleteSlide = (idx: number) => {
+    if (slides.length <= 1) return; // keep at least one slide
+    syncCanvasToState();
+    const newSlides = slides.filter((_, i) => i !== idx);
+    const newIndex = idx >= newSlides.length ? newSlides.length - 1 : idx;
+    setSlides(newSlides);
+    setCurrentSlideIndex(newIndex);
   };
 
   useEffect(() => {
@@ -330,14 +339,21 @@ export default function PPTSlideEditor({ slides: initialSlides, onClose, onSave,
                   onClick={() => switchSlide(idx)}
                   className={`w-full text-left rounded-xl overflow-hidden transition-all duration-300 border-2 ${currentSlideIndex === idx ? 'border-orange-500 shadow-lg shadow-orange-500/20' : 'border-white/5 hover:border-white/20'}`}
                 >
-                  <div className="aspect-video bg-white relative">
+                  <div className="aspect-video relative" style={{ backgroundColor: s.background || '#12141c' }}>
                     {s.previewImage ? (
                       <img src={s.previewImage} alt={`Slide ${idx + 1}`} className="w-full h-full object-cover" />
                     ) : (
-                      <div className="w-full h-full flex flex-col gap-2 p-2 bg-gray-50">
-                        <div className="h-2 w-3/4 bg-gray-200 rounded" />
-                        <div className="h-1 w-1/2 bg-gray-100 rounded" />
-                        <div className="h-1 w-2/3 bg-gray-100 rounded" />
+                      <div className="w-full h-full flex flex-col gap-2 p-3" style={{ backgroundColor: s.background || '#12141c' }}>
+                        <div className="flex items-center gap-1 mb-1">
+                          <div className="w-[2px] h-3 bg-orange-500 rounded-full shrink-0" />
+                          <div className="text-[6px] font-black text-white leading-tight line-clamp-1 tracking-tight">{s.title}</div>
+                        </div>
+                        {s.content.slice(0, 3).map((c, ci) => (
+                          <div key={ci} className="flex items-start gap-1">
+                            <div className="w-1 h-1 rounded-full bg-orange-500/70 shrink-0 mt-[2px]" />
+                            <div className="text-[5px] text-gray-400 line-clamp-1">{c}</div>
+                          </div>
+                        ))}
                       </div>
                     )}
                     <div className="absolute top-2 left-2 w-6 h-6 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-[10px] font-bold text-white shadow-lg">
@@ -348,6 +364,16 @@ export default function PPTSlideEditor({ slides: initialSlides, onClose, onSave,
                     {s.title || `Slide ${idx + 1}`}
                   </div>
                 </button>
+                {/* Delete slide button — shown on hover, hidden if only 1 slide */}
+                {slides.length > 1 && (
+                  <button
+                    onClick={(e) => { e.stopPropagation(); deleteSlide(idx); }}
+                    className="absolute top-2 right-2 w-6 h-6 rounded-full bg-red-600/80 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 shadow-lg z-10"
+                    title="Delete slide"
+                  >
+                    <Trash2 size={11} />
+                  </button>
+                )}
               </div>
             ))}
           </div>
@@ -388,7 +414,7 @@ export default function PPTSlideEditor({ slides: initialSlides, onClose, onSave,
           <div className="flex-1 flex items-center justify-center p-12 overflow-auto custom-scrollbar bg-black/40">
             <div className="relative group/canvas">
               <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-purple-600 rounded-lg blur opacity-20 group-hover/canvas:opacity-30 transition duration-1000"></div>
-              <div className="bg-white shadow-2xl canvas-container relative rounded-sm overflow-hidden">
+              <div className="shadow-2xl canvas-container relative rounded-sm overflow-hidden">
                 <canvas ref={canvasRef} />
               </div>
             </div>

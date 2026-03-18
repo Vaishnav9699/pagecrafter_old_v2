@@ -47,7 +47,7 @@ export default function PPTPanel({ onPPTGenerated, onLoadingChange, onBack }: PP
             const response = await fetch('/api/generate-ppt', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                     prompt: userMessage,
                     customApiKey: customApiKey
                 }),
@@ -133,7 +133,7 @@ export default function PPTPanel({ onPPTGenerated, onLoadingChange, onBack }: PP
                         disabled={isLoading || !input.trim()}
                         className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 bg-orange-600 text-white rounded-xl shadow-lg shadow-orange-500/20 hover:scale-110 active:scale-95 transition-all disabled:opacity-50"
                     >
-                        <svg className="w-4 h-4 transform rotate-90" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z" /></svg>
+                        <svg className="w-4 h-4 transform -rotate-90" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z" /></svg>
                     </button>
                 </form>
             </div>

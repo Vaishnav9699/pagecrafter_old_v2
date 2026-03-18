@@ -47,7 +47,7 @@ export default function DOCPanel({ onDOCGenerated, onLoadingChange, onBack }: DO
             const response = await fetch('/api/generate-doc', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                     prompt: userMessage,
                     customApiKey: customApiKey
                 }),
@@ -133,7 +133,7 @@ export default function DOCPanel({ onDOCGenerated, onLoadingChange, onBack }: DO
                         disabled={isLoading || !input.trim()}
                         className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 bg-emerald-600 text-white rounded-xl shadow-lg shadow-emerald-500/20 hover:scale-110 active:scale-95 transition-all disabled:opacity-50"
                     >
-                        <svg className="w-4 h-4 transform rotate-90" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z" /></svg>
+                        <svg className="w-4 h-4 transform -rotate-90" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z" /></svg>
                     </button>
                 </form>
             </div>

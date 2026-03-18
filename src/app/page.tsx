@@ -1211,7 +1211,7 @@ ${project.lastGeneratedCode ? 'This project contains generated HTML, CSS, and Ja
                   )}
 
                   {activeView === 'community' && (
-                    <div className="space-y-8 animate-fade-in">
+                    <div className="space-y-8 animate-fade-in px-6  py-3">
                       <div className="flex items-center justify-between">
                         <h2 className={`text-3xl font-bold uppercase tracking-tight ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Community Hub</h2>
                         <div className="flex bg-[#1a1c23] p-1.5 rounded-2xl border border-gray-800/50 shadow-inner shadow-black/40">

@@ -129,7 +129,7 @@ export default function NewProjectModal({
                     onClick={() => setIsAdvanced(!isAdvanced)}
                     className={`flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors ${isAdvanced ? 'text-indigo-400' : 'text-gray-500 hover:text-gray-300'}`}
                   >
-                    <svg className={`w-4 h-4 transform transition-transform ${isAdvanced ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className={`w-4 h-4 transform transition-transform ${isAdvanced ? '-rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="9 5l7 7-7 7" />
                     </svg>
                     Advanced Developer Settings

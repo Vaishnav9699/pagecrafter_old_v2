@@ -210,7 +210,7 @@ export default function ChatPanel({ onCodeGenerated, onLoadingChange, currentPro
                 disabled={isLoading || !input.trim()}
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 bg-indigo-600 text-white rounded-xl shadow-lg shadow-indigo-500/20 hover:scale-110 active:scale-95 transition-all disabled:opacity-50 disabled:grayscale"
               >
-                <svg className="w-4 h-4 transform rotate-90" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z" /></svg>
+                <svg className="w-4 h-4 transform -rotate-90" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z" /></svg>
               </button>
             </form>
           </div>
