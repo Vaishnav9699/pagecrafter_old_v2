@@ -364,7 +364,7 @@ export default function DOCPreview({ document: initialDoc, isLoading }: DOCPrevi
                         className="flex items-center gap-2 px-3 py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl text-xs font-bold transition-all border border-emerald-100"
                     >
                         <Edit3 size={14} />
-                        <span>Edit with GrapesJS</span>
+                        <span>Edit with Editor</span>
                     </button>
 
                     <div className="w-px h-6 bg-gray-100 mx-2" />

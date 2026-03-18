@@ -141,38 +141,6 @@ export default function ChatPanel({ onCodeGenerated, onLoadingChange, currentPro
 
   return (
     <div className={`flex flex-col h-full min-h-0 transition-all duration-500 ease-in-out ${theme === 'dark' ? 'bg-[#0f1117]' : 'bg-gray-50'}`}>
-      {/* Premium Tabs */}
-      <div className="flex items-center gap-1 p-2 bg-black/20 border-b border-white/5">
-        {[
-          {
-            id: 'ai', label: 'AI Assistant', icon: (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-            )
-          },
-          {
-            id: 'components', label: 'Components', icon: (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
-            )
-          },
-          {
-            id: 'styles', label: 'Styles', icon: (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
-            )
-          }
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
-            className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 ${activeTab === tab.id
-              ? 'bg-indigo-600/10 text-indigo-400 shadow-lg'
-              : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'}`}
-          >
-            {tab.icon}
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
       {activeTab === 'ai' ? (
         <>
           {/* AI Header */}

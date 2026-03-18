@@ -52,11 +52,11 @@ export default function Sidebar({
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'projects', label: 'Projects', icon: Folder, hasDropdown: true },
-    { id: 'ai-models', label: 'AI Models', icon: Sparkles, hasDropdown: true },
+    { id: 'ai-models', label: 'AI Modes', icon: Sparkles, hasDropdown: true },
     { id: 'community', label: 'Community', icon: Globe },
-    { id: 'templates', label: 'Templates', icon: LayoutGrid },
-    { id: 'assets', label: 'Assets', icon: ImageIcon },
-    { id: 'settings', label: 'Settings', icon: Settings, hasDropdown: true },
+    // { id: 'templates', label: 'Templates', icon: LayoutGrid },
+    // { id: 'assets', label: 'Assets', icon: ImageIcon },
+    // { id: 'settings', label: 'Settings', icon: Settings, hasDropdown: true },
   ];
 
   const aiModelItems = [
