@@ -172,8 +172,8 @@ export default function Sidebar({
                     <button
                       onClick={onNewProject}
                       className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition-colors ${theme === 'dark'
-                          ? 'text-purple-400 hover:text-purple-300'
-                          : 'text-indigo-600 hover:text-indigo-500'
+                        ? 'text-purple-400 hover:text-purple-300'
+                        : 'text-indigo-600 hover:text-indigo-500'
                         }`}
                     >
                       + Create New
@@ -209,24 +209,6 @@ export default function Sidebar({
             );
           })}
         </nav>
-
-        {/* User / Footer Section */}
-        <div className={`p-4 ${theme === 'dark' ? 'border-t border-slate-800/50' : 'border-t border-gray-200'
-          }`}>
-          <div className={`flex items-center gap-3 px-2 py-2 transition-all duration-500 ${isCollapsed ? 'justify-center' : ''}`}>
-            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-xs font-black text-white shadow-lg shrink-0">
-              JD
-            </div>
-            {!isCollapsed && (
-              <div className="flex flex-col min-w-0 animate-fade-in">
-                <span className={`text-sm font-bold truncate ${theme === 'dark' ? 'text-white' : 'text-gray-900'
-                  }`}>John Doe</span>
-                <span className={`text-[10px] uppercase tracking-wider font-semibold ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'
-                  }`}>Pro Plan</span>
-              </div>
-            )}
-          </div>
-        </div>
       </aside>
 
       <style jsx>{`

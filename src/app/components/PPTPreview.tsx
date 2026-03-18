@@ -442,24 +442,68 @@ export default function PPTPreview({ slides: initialSlides, isLoading }: PPTPrev
 
             {/* Thumbnail Tray */}
             <div className="h-32 bg-black/40 border-t border-white/5 p-4 flex gap-4 overflow-x-auto custom-scrollbar scroll-smooth">
-                {slides.map((s, idx) =>                     <button
+                {slides.map((s, idx) => (
+                    <button
                         key={idx}
                         onClick={() => setCurrentSlide(idx)}
                         className={`group relative flex-shrink-0 w-44 aspect-video rounded-xl overflow-hidden transition-all duration-300 border-2 ${
                             currentSlide === idx ? 'border-orange-500 shadow-lg scale-105 z-10' : 'border-white/5 hover:border-white/20'
                         }`}
                     >
-                        <div className="w-full h-full bg-white flex flex-col p-2">
-                            {s.previewImage ? (
+                        {s.previewImage ? (
+                            <div className="w-full h-full bg-white">
                                 <img src={s.previewImage} alt={s.title} className="w-full h-full object-cover" />
-                            ) : (
-                                <>
-                                    <div className="h-1.5 w-full bg-gray-200 rounded-full mb-1" />
-                                    <div className="h-1 w-2/3 bg-gray-100 rounded-full mb-1" />
-                                    <div className="h-1 w-1/2 bg-gray-100 rounded-full" />
-                                </>
-                            )}
-                        </div>
+                            </div>
+                        ) : (
+                            <div className="w-full h-full bg-[#12141c] flex flex-col overflow-hidden relative">
+                                {/* Decorative gradient blobs - matching main slide */}
+                                <div className="absolute top-0 right-0 w-12 h-12 bg-orange-600/10 blur-[20px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                                <div className="absolute bottom-0 left-0 w-12 h-12 bg-purple-600/10 blur-[20px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+
+                                {s.layout === 'title' ? (
+                                    /* Title slide thumbnail */
+                                    <div className="flex-1 flex flex-col items-center justify-center text-center gap-1 px-2 py-1.5 relative z-10">
+                                        <div className="w-6 h-[2px] bg-orange-500 rounded-full mb-0.5" />
+                                        <div className="text-[7px] font-black text-white leading-tight line-clamp-2 tracking-tight">
+                                            {renderContent(s.title)}
+                                        </div>
+                                        {s.content[0] && (
+                                            <div className="text-[5px] text-gray-400 leading-tight line-clamp-1 mt-0.5">
+                                                {renderContent(s.content[0])}
+                                            </div>
+                                        )}
+                                    </div>
+                                ) : (
+                                    /* Content slide thumbnail */
+                                    <div className="flex-1 flex flex-col px-2 py-1.5 overflow-hidden relative z-10">
+                                        <div className="flex items-start gap-1 mb-1">
+                                            <div className="w-[2px] h-3 bg-orange-500 rounded-full shrink-0 mt-0.5" />
+                                            <div className="text-[6px] font-black text-white leading-tight line-clamp-1 tracking-tight">
+                                                {renderContent(s.title)}
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col gap-[2px] flex-1 overflow-hidden">
+                                            {s.content.slice(0, 4).map((item, cIdx) => (
+                                                <div key={cIdx} className="flex items-start gap-1">
+                                                    <div className="w-1 h-1 rounded-full bg-orange-500/70 shrink-0 mt-[2px]" />
+                                                    <div className="text-[5px] text-gray-400 leading-tight line-clamp-1">
+                                                        {renderContent(item)}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                            {s.content.length > 4 && (
+                                                <div className="text-[4px] text-gray-600 pl-2">+{s.content.length - 4} more...</div>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Slide number badge */}
+                                <div className="absolute bottom-0.5 right-1 text-[5px] font-bold text-gray-600">
+                                    {idx + 1}
+                                </div>
+                            </div>
+                        )}
                         {currentSlide === idx && <div className="absolute inset-0 bg-orange-500/5" />}
                         {s.canvasState && (
                           <div className="absolute top-1 right-1">
@@ -467,7 +511,7 @@ export default function PPTPreview({ slides: initialSlides, isLoading }: PPTPrev
                           </div>
                         )}
                     </button>
-                )}
+                ))}
             </div>
 
             <style jsx>{`
